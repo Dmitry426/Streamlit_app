@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./Dockerfiles/streamlit/Dockerfile
+      target: development
+    command: [ "streamlit"  , "run", "./app/efficientnet_app.py" ]
+    environment:
+      DEBUG: 'True'
+      POSTGRES_HOST: postgres
+      SETTINGS_LOG_FILE: 'True'
+    volumes:
+      - "./streamlit_bert:/src/app"
+    ports:
+      - "8501:8501"
